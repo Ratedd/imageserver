@@ -62,9 +62,9 @@ router.get('/:file', async (req, res) => {
 	const extension = fileName.split('.')[1];
 	const exists = await access(`../uploads/${extension}/fileName`, constants.F_OK, (err) => {
 		if (!err) {
-			resolve(true);
+			resolve(false);
 		}
-		resolve(false);
+		resolve(true);
 	});
 	if (exists) {
 		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
