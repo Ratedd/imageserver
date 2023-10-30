@@ -61,9 +61,9 @@ const checkFileExist = (fileName, extension) => {
 	return new Promise((resolve, reject) => {
 		access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
 			if (!err) {
-				resolve(false);
+				resolve(true);
 			}
-			resolve(true);
+			resolve(false);
 		});
 	});
 };
