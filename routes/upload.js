@@ -57,15 +57,21 @@ router.post('/upload', (req, res) => {
 	});
 });
 
+const checkFileExist = (fileName, extension) => {
+	return new Promise((resolve, reject) => {
+		access(`../uploads/${extension}/fileName`, constants.F_OK, (err) => {
+			if (!err) {
+				resolve(false);
+			}
+			resolve(true);
+		});
+	});
+};
+
 router.get('/:file', async (req, res) => {
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
-	const exists = await access(`../uploads/${extension}/fileName`, constants.F_OK, (err) => {
-		if (!err) {
-			resolve(false);
-		}
-		resolve(true);
-	});
+	const exists = await checkFileExist(fileName, extension);
 	if (exists) {
 		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
 	}
