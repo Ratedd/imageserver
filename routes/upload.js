@@ -59,13 +59,13 @@ router.post('/upload', (req, res) => {
 
 const checkFileExist = (fileName, extension) => {
 	return new Promise((resolve, reject) => {
-		console.log(fileName, extension);
 		access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
 			if (!err) {
-				resolve(true);
+				reject(true);
 			}
-			resolve(false);
+			resolve(true);
 		});
+		resolve(false);
 	});
 };
 
@@ -73,9 +73,7 @@ router.get('/:file', async (req, res) => {
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
 	const exists = await checkFileExist(fileName, extension);
-	console.log(exists);
 	if (exists) {
-		console.log("exists");
 		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
 	}
 	return res.json({ message: '404' })
