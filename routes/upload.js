@@ -51,7 +51,7 @@ router.post('/upload', (req, res) => {
 		else {
 			if (req.file.filename != undefined) {
 				const fileName = req.file.filename;
-				res.json({ message: `uploads/${fileName}` });
+				res.json({ message: `${fileName}` });
 			}
 		}
 	});
