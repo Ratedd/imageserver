@@ -74,6 +74,7 @@ router.get('/:file', async (req, res) => {
 	const exists = await checkFileExist(fileName, extension);
 	console.log(exists);
 	if (exists) {
+		console.log("exists");
 		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
 	}
 	return res.json({ message: '404' })
