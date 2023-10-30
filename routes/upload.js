@@ -59,6 +59,7 @@ router.post('/upload', (req, res) => {
 
 const checkFileExist = (fileName, extension) => {
 	return new Promise((resolve, reject) => {
+		console.log(fileName, extension);
 		access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
 			if (!err) {
 				resolve(true);
