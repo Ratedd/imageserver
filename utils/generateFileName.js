@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const checkFileExist = (fileName, extension) => {
 	return new Promise((resolve, reject) => {
-		access(`../uploads/${extension}/fileName`, constants.F_OK, (err) => {
+		access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
 			if (!err) {
 				resolve(true);
 			}
