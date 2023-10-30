@@ -63,8 +63,8 @@ router.get('/:file', async (req, res) => {
 	access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
 		if (!err) {
 			return res.json({ message: '404' })
-
 		}
+		console.log("file here");
 		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
 	});
 });
