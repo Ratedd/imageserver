@@ -1,13 +1,15 @@
 const { access, constants } = require('fs');
 const { v4: uuidv4 } = require('uuid');
+const { join } = require('path');
 
 const checkFileExist = (fileName, extension) => {
-	return new Promise((resolve, reject) => {
-		access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
-			if (!err) {
-				resolve(true);
+	return new Promise((resolve) => {
+		const filePath = join(__dirname, '..', 'uploads', extension, fileName);
+		access(filePath, constants.F_OK, (err) => {
+			if (err) {
+				resolve(false);
 			}
-			resolve(false);
+			resolve(true);
 		});
 	});
 };
