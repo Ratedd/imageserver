@@ -60,11 +60,11 @@ router.post('/upload', (req, res) => {
 router.get('/:file', async (req, res) => {
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
+	console.log(`../uploads/${extension}/${fileName}`);
 	access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
 		if (err) {
 			return res.json({ message: '404' })
 		}
-		console.log(`../uploads/${extension}/${fileName}`);
 		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
 	});
 	// return res.sendFile(`./uploads/${extension}/${fileName}`, { root: '.' });
