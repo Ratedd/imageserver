@@ -43,6 +43,10 @@ const upload = multer({
 
 const router = Router();
 
+router.get('/', (req, res) => {
+	res.send('');
+});
+
 router.post('/upload', (req, res) => {
 	upload(req, res, (err) => {
 		if (err) {
