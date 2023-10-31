@@ -58,8 +58,6 @@ router.post('/upload', (req, res) => {
 	});
 });
 
-const path = require('path');
-
 router.get('/:file', async (req, res) => {
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
