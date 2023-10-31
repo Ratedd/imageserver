@@ -64,7 +64,6 @@ router.get('/:file', async (req, res) => {
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
 	const filePath = join(__dirname, '..', 'uploads', extension, fileName);
-	console.log(filePath);
 	access(filePath, constants.F_OK, (err) => {
 		if (err) {
 			return res.json({ message: '404' })
