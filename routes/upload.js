@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const { access, constants } = require('fs');
+const { join } = require('path');
 const multer = require('multer');
 const mimeAllowed = ['image/png', 'image/jpeg', 'image/gif', 'video/mp4', 'text/plain'];
 const generateFileName = require('../utils/generateFileName');
@@ -57,17 +58,19 @@ router.post('/upload', (req, res) => {
 	});
 });
 
+const path = require('path');
+
 router.get('/:file', async (req, res) => {
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
-	console.log(`../uploads/${extension}/${fileName}`);
-	access(`../uploads/${extension}/${fileName}`, constants.F_OK, (err) => {
+	const filePath = join(__dirname, '..', 'uploads', extension, fileName);
+	console.log(filePath);
+	access(filePath, constants.F_OK, (err) => {
 		if (err) {
 			return res.json({ message: '404' })
 		}
-		return res.sendFile(`/uploads/${extension}/${fileName}`, { root: '.' });
+		return res.sendFile(filePath);
 	});
-	// return res.sendFile(`./uploads/${extension}/${fileName}`, { root: '.' });
 });
 
 module.exports = router;
