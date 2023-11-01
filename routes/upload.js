@@ -6,8 +6,6 @@ const multer = require('multer');
 const mimeAllowed = ['image/png', 'image/jpeg', 'image/gif', 'video/mp4', 'text/plain'];
 const generateFileName = require('../utils/generateFileName');
 
-const router = Router();
-
 const storage = multer.diskStorage({
 	destination: function (req, file, next) {
 		let extension;
@@ -43,6 +41,8 @@ const upload = multer({
 		next(null, true);
 	}
 }).single('item');
+
+const router = Router();
 
 router.post('/upload', (req, res) => {
 	upload(req, res, (err) => {
