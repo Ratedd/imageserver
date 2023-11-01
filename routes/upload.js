@@ -49,7 +49,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/upload', (req, res) => {
-	console.log('in here');
 	upload(req, res, (err) => {
 		if (err) {
 			res.status(400);
@@ -65,7 +64,6 @@ router.post('/upload', (req, res) => {
 });
 
 router.get('/:file', async (req, res) => {
-	console.log('in here2');
 	const fileName = req.params.file;
 	const extension = fileName.split('.')[1];
 	const filePath = join(__dirname, '..', 'uploads', extension, fileName);
