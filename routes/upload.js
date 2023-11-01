@@ -44,6 +44,10 @@ const upload = multer({
 
 const router = Router();
 
+router.get('/', (req, res) => {
+	res.send('');
+});
+
 router.post('/upload', (req, res) => {
 	console.log('in here');
 	upload(req, res, (err) => {
