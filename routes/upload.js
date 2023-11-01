@@ -45,6 +45,7 @@ const upload = multer({
 const router = Router();
 
 router.post('/upload', (req, res) => {
+	console.log('in here');
 	upload(req, res, (err) => {
 		if (err) {
 			res.status(400);
